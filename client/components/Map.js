@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/index';
-import sample from '../sampleData';
 
 let map;
 let markerData;
