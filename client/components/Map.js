@@ -9,6 +9,24 @@ let markers = [];
 let cachedMarkers = [];
 let newBoundary = new google.maps.LatLngBounds();
 
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+function getDistance(p1, p2) {
+  //  Haversine formula
+  const lat1 = p1.lat;
+  const lon1 = p1.lng;
+  const lat2 = p2.lat;
+  const lon2 = p2.lng;
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(lat2 - lat1);  // deg2rad below
+  const dLon = deg2rad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const d = R * c * 0.621371; // Distance in miles
+  return d.toFixed(2);
+}
+
 class Map extends Component {
   constructor() {
     super();
@@ -73,6 +91,9 @@ class Map extends Component {
     //  delete old markers
     markers.forEach(marker => marker.setMap(null));
     markers = [];
+    cachedMarkers.forEach(marker => marker.setMap(null));
+    cachedMarkers = [];
+
     this.renderMarkers();
     map.setZoom(14);
     // map.fitBounds(newBoundary);
@@ -118,13 +139,17 @@ class Map extends Component {
 
   renderInfoWindow(movie) {
     const actors = [movie.actor_1, movie.actor_2, movie.actor_3].filter(actor => actor !== undefined).join(', ');
+    const p1 = { lat: movie.geometry.coordinates[0], lng: movie.geometry.coordinates[1] };
+    const p2 = { lat: this.state.markerCenter.position.lat(), lng: this.state.markerCenter.position.lng() };
+    const distance = getDistance(p1, p2);
     const content = `<div class="infowindow">
       <div class="infowindow-left">
         <img src=${this.props.movies.poster} />
       </div>
       <p>${movie.title}</p>
-      <p>Year: ${movie.release_year}</p>
       <p>Address: ${movie.address}</p>
+      <p>Distance: ${distance} miles</p>
+      <p>Year: ${movie.release_year}</p>
       <p>Actor: ${actors}</p>
       <p>Director: ${movie.director}</p>
     </div>`;

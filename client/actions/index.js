@@ -34,7 +34,6 @@ export function handleFilmChange(name) {
 }
 
 export function getPoster(query) {
-  console.log("query", query);
   return (dispatch) => {
     return axios.get('https://api.themoviedb.org/3/search/movie', {
       params: {
@@ -43,7 +42,6 @@ export function getPoster(query) {
       }
     })
     .then(response => {
-      console.log(response.data.results[0].poster_path);
       const path = `http://image.tmdb.org/t/p/w500/${response.data.results[0].poster_path}`;
       dispatch({ type: GET_POSTER, payload: path });
     });

@@ -5,7 +5,6 @@ const googleMapsClient = require('@google/maps').createClient({
 });
 
 const queryPlaceDetail = (placeid, entry) => {
-  console.log("in queryPlaceDetail");
   googleMapsClient.place({ placeid })
   .asPromise()
   .then((result) => {
