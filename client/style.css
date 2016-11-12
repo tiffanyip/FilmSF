@@ -10,10 +10,11 @@ body {
 }
 #customNav a {
   color: black !important;
+  font-family: 'Raleway', sans-serif !important;
 }
 #customNav h4 {
   font-family: 'Raleway', sans-serif;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bolder;
   margin-top: 0 !important;
   display: inline-block;
