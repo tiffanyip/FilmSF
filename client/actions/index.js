@@ -8,7 +8,7 @@ export const GET_POSTER = 'GET_POSTER';
 
 export function fetchMovies() {
   return (dispatch) => {
-    return axios.get('http://localhost:8080/api/movies')
+    return axios.get('/api/movies')
     .then(response => {
       dispatch({ type: FETCH_MOVIES, payload: response.data });
     });
