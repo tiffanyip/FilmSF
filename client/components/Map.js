@@ -72,7 +72,8 @@ class Map extends Component {
     markers.forEach(marker => marker.setMap(null));
     markers = [];
     this.renderMarkers();
-    map.fitBounds(newBoundary);
+    map.setZoom(14);
+    // map.fitBounds(newBoundary);
   }
 
   renderMarkers() {
