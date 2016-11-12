@@ -1,6 +1,6 @@
 # FilmSF
-App that helps film lovers to find the film locations in SF.
-
+App that helps film lovers to find the film locations in SF. <br/ >
+Deployed version: https://film-sf.herokuapp.com/movies
 ## Installaion
 ```
 npm install
