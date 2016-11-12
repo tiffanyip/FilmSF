@@ -15,6 +15,7 @@ function NavBar() {
         <h4>Film SF</h4>
       </a>
       <ul>
+        <li><a href="/about">About</a></li>
         <li><a href="/map">Map</a></li>
         <li><a href="/movies">List</a></li>
       </ul>

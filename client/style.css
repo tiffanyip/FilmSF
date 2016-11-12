@@ -165,6 +165,7 @@ body {
   margin-right: 3em;
 }
 .infowindow {
+  margin: 1em 0.5em;
   display: inline-block;
 }
 

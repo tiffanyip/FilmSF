@@ -146,7 +146,7 @@ class Map extends Component {
       <div class="infowindow-left">
         <img src=${this.props.movies.poster} />
       </div>
-      <p>${movie.title}</p>
+      <strong>${movie.title}</strong>
       <p>Address: ${movie.address}</p>
       <p>Distance: ${distance} miles</p>
       <p>Year: ${movie.release_year}</p>
