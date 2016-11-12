@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { handleLocationChange, handleSearchSubmit, fetchMovies } from '../actions/index';
+import { handleLocationChange, handleSearchSubmit, fetchMovies, getPoster } from '../actions/index';
 import FilmSuggest from './FilmSuggest';
+import NavBar from './NavBar';
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -26,20 +28,14 @@ class SearchBar extends Component {
       location: this.props.movies.location,
     });
     this.props.fetchMovies(this.props.movies.film);
+    this.props.getPoster(this.props.movies.film);
     browserHistory.push('/map');
   }
+
   render() {
     return (
       <div className="search-bar">
-        <h4>
-          <img
-            src="../video-camera.png"
-            height="50px"
-            width="50px"
-            onClick={() => { browserHistory.push('/'); }}
-          ></img>
-          Film SF
-        </h4>
+        <NavBar />
         <div className="inner-bar">
           <div className="row">
             <div className="col s5">
@@ -51,13 +47,13 @@ class SearchBar extends Component {
                 className="controls"
                 type="text"
                 placeholder="Enter a location"
-                id="first_name"
+                id="pac-input"
               />
             </div>
-            <div className="col s2 search-button">
-              <a className="mybutton" onClick={this.submitSearch}>
+            <div className="col s2">
+              <button className="mybutton" onClick={this.submitSearch}>
                 <i className="fa fa-search fa3x" aria-hidden="true"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -69,4 +65,4 @@ class SearchBar extends Component {
 function mapStateToProps({ movies }) {
   return { movies };
 }
-export default connect(mapStateToProps, { handleLocationChange, handleSearchSubmit, fetchMovies })(SearchBar);
+export default connect(mapStateToProps, { handleLocationChange, handleSearchSubmit, fetchMovies, getPoster })(SearchBar);

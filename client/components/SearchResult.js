@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import SearchBar from './SearchBar';
 import Map from './Map';
 
-
 class SearchResult extends Component {
 
   render() {

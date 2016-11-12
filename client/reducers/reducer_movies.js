@@ -1,6 +1,6 @@
-import { FETCH_MOVIES, SEARCH_MOVIE, LOCATION_CHANGE, FILM_CHANGE } from '../actions/index';
+import { FETCH_MOVIES, SEARCH_MOVIE, LOCATION_CHANGE, FILM_CHANGE, GET_POSTER } from '../actions/index';
 
-const INITIAL_STATE = { all: [], searchTerm: '', location: '', film: '' };
+const INITIAL_STATE = { all: [], searchTerm: '', location: '', film: '', poster: '' };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -12,6 +12,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, location: action.payload };
     case FILM_CHANGE:
       return { ...state, film: action.payload };
+    case GET_POSTER:
+      return { ...state, poster: action.payload };
     default:
       return state;
   }

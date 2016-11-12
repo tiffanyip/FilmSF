@@ -6,6 +6,7 @@ let map;
 let markerData;
 let markers = [];
 let cachedMarkers = [];
+let newBoundary = new google.maps.LatLngBounds();
 
 class Map extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class Map extends Component {
       infoWindow: new google.maps.InfoWindow(),
     };
     this.renderMarkers = this.renderMarkers.bind(this);
+    this.renderInfoWindow = this.renderInfoWindow.bind(this);
   }
 
   componentWillMount() {
@@ -56,6 +58,8 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
+    newBoundary = new google.maps.LatLngBounds();
+
     // pin black marker to map center
     if (!this.props.movies.searchTerm.location || this.props.movies.searchTerm.location === '') {
       map.setCenter(this.state.center);
@@ -68,6 +72,7 @@ class Map extends Component {
     markers.forEach(marker => marker.setMap(null));
     markers = [];
     this.renderMarkers();
+    map.fitBounds(newBoundary);
   }
 
   renderMarkers() {
@@ -78,6 +83,7 @@ class Map extends Component {
     }
     //  generate markers & info windows
     markerData.forEach((movie) => {
+      //  reset boundary
       if (movie.geometry.coordinates.length !== 0) {
         const coord = new google.maps.LatLng({
           lat: movie.geometry.coordinates[0],
@@ -95,21 +101,31 @@ class Map extends Component {
             },
           });
           //  add infowindow for marker
-          const content = `<div>
-          <p>${movie.title}</p>
-          <p>Year: ${movie.release_year}</p>
-          <p>Address: ${movie.address}</p>
-          <p>Actor: ${movie.actor_1}, ${movie.actor_2}, ${movie.actor_3}</p>
-          <p>Director: ${movie.director}</p>
-          </div>`;
+          const content = this.renderInfoWindow(movie);
           marker.addListener('click', () => {
             this.state.infoWindow.setContent(content);
             this.state.infoWindow.open(map, marker);
           });
+          newBoundary.extend(marker.position);
           markers.push(marker);
         }
       }
     });
+  }
+
+  renderInfoWindow(movie) {
+    const actors = [movie.actor_1, movie.actor_2, movie.actor_3].filter(actor => actor !== undefined).join(', ');
+    const content = `<div class="infowindow">
+      <div class="infowindow-left">
+        <img src=${this.props.movies.poster} />
+      </div>
+      <p>${movie.title}</p>
+      <p>Year: ${movie.release_year}</p>
+      <p>Address: ${movie.address}</p>
+      <p>Actor: ${actors}</p>
+      <p>Director: ${movie.director}</p>
+    </div>`;
+    return content;
   }
 
   render() {
