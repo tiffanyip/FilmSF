@@ -20,7 +20,7 @@ body {
   display: inline-block;
 }
 .landing {
-  background-image: url('./pexels-photo-29737.jpg');
+  background-image: url('./assets/pexels-photo-29737.jpg');
   height: 78vh;
   background-repeat: no-repeat;
   background-size: 100%;

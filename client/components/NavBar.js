@@ -7,7 +7,7 @@ function NavBar() {
       <a href="/" className="brand-logo center">
         <img
           role="presentation"
-          src="../video-camera.png"
+          src="../assets/video-camera.png"
           height="50px"
           width="50px"
           onClick={() => { browserHistory.push('/'); }}

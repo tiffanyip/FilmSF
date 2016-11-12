@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../actions/index';
+import mapTheme from '../styles/mapTheme';
 
 let map;
 let markerData;
@@ -30,6 +31,7 @@ class Map extends Component {
     //  set up map
     map = new google.maps.Map(this.map, {
       center: this.state.center,
+      styles: mapTheme,
       zoom: 16,
     });
     //  set up marker in the center
@@ -37,7 +39,7 @@ class Map extends Component {
       position: this.state.center,
       map,
       icon: {
-        url: '../map_pin.png',
+        url: '../assets/map_pin.png',
         scaledSize: new google.maps.Size(40, 40),
       },
     });
@@ -97,7 +99,7 @@ class Map extends Component {
             position: { lat: movie.geometry.coordinates[0], lng: movie.geometry.coordinates[1] },
             map,
             icon: {
-              url: '../map_pin_red.png',
+              url: '../assets/map_pin_red.png',
               scaledSize: new google.maps.Size(40, 40),
             },
           });
