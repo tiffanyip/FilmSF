@@ -31,31 +31,24 @@ class MovieEntry extends Component {
     const p1 = { lat: this.state.movie.geometry.coordinates[0], lng: this.state.movie.geometry.coordinates[1] };
     const p2 = { lat: this.props.movies.location.lat, lng: this.props.movies.location.lng };
     return (
-      <div className="movie-entry">
-        <div className="col s5">
-          <div className="card horizontal">
-            <div className="card-image">
-              <img src={this.props.movies.poster} />
-            </div>
-            <div className="card-stacked">
-              <div className="card-content">
-                <strong>{this.state.movie.title}</strong>
-                <p>Address: {this.state.movie.address}</p>
-                <p>Director: {this.state.movie.director}</p>
-                <p>Year: {this.state.movie.release_year}</p>
-                <p>Actors:{actors}</p>
-                <p>Distace: {getDistance(p1, p2)} miles</p>
-                {/* <p>{this.state.movie.writer}</p> */}
-              </div>
-            </div>
-          </div>
+      <div className="movie-entry row">
+        <div className="entry-img">
+          <img src={this.props.movies.poster} height="180px" width="auto" />
+        </div>
+        <div className="entry-content">
+          <strong>{this.state.movie.title}</strong>
+          <div className="distance">Distace: {getDistance(p1, p2)} miles</div>
+          <p>{this.state.movie.address}</p>
+          <p>Director: {this.state.movie.director}</p>
+          <p>Year: {this.state.movie.release_year}</p>
+          <p>Actors: {actors}</p>
+          {/* <p>{this.state.movie.writer}</p> */}
         </div>
       </div>
     );
   }
 }
 
-// export default MovieEntry;
 function mapStateToProps({ movies }) {
   return { movies };
 }
