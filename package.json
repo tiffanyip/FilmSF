@@ -1,12 +1,10 @@
 {
-  "name": "MovieFounder",
+  "name": "FilmSF",
   "version": "1.0.0",
   "description": "SF Movies Search",
   "main": "webpack.config.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch",
     "bundle": "node_modules/.bin/webpack -w",
     "dev": "webpack -w",
     "build": "webpack -p",
